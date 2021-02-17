@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas</title> 
+    <script>
+      window.addEventListener("load", init, false);
+      
+      function init() {
+
+       
+          // получение элемента и его графического контекста.
+          let canvas = document.getElementById("canvas");
+          let context = canvas.getContext("2d");
+       
+    //Тень для флага
+        //  context.shadowColor = "#B22222";
+           // context.shadowOffsetX = 2;
+          //  context.shadowOffsetY = 2;
+          //  context.shadowBlur = 2;
+
+              //Кленовый лист на флаге
+
+         //Левая часть
+          context.beginPath();
+          context.moveTo(200, 20); //холст 400*400 берем середину 200px и опускаемся вниз на 20px
+          context.lineTo(180, 70);//идем влево, опускаемся на 70 px возвращаемся до 180px
+          context.lineTo(160, 50); //итд...для удобства используем event.offsetX и event.offsetX
+         context.lineTo(170, 115);
+          context.bezierCurveTo(  170, 115,  170, 130, 160,125);//Делаем закругления,эти три точки также подбираем через event.offsetX и event.offsetX
+          context.lineTo(125, 100);
+          context.bezierCurveTo(  125, 100, 130, 120, 125,125);
+         context.lineTo(95, 115);
+        context.bezierCurveTo(  95, 115, 115, 135, 120,145);
+         context.lineTo(90,155);
+              context.lineTo(150,190);
+             context.bezierCurveTo( 150, 195,  155,200, 130,220);
+              context.lineTo(200,210);
+               context.bezierCurveTo( 200, 210,  200,215, 200,260);
+             //Правая часть    
+          context.moveTo(200, 20);//Все точно также, только идем вправо
+              context.lineTo(220,70);
+               context.lineTo(240,50);
+              context.lineTo(230,115);
+                context.bezierCurveTo( 230, 115,  230, 130, 240,125);
+               context.lineTo(280,100);
+                context.bezierCurveTo(  280, 100, 270, 120, 280,125);
+                context.lineTo(315,115);
+                context.bezierCurveTo( 315, 115,  290, 135, 295,145);
+               context.lineTo(315,155);
+               context.lineTo(260,190);
+               context.bezierCurveTo( 260, 190, 260,200, 280,220);
+                context.lineTo(210,210);
+                context.bezierCurveTo( 210, 210, 210,215, 215,260);
+               context.lineTo(200,260);
+               context.closePath(); // смыкание, хорошо что сомкнулись я  так понимаю, что moveTo должен быть один, если их перед смыканием много то точки могут неправильно сомкнуться
+                context.fillStyle = '#B22222'; // темно-красный цвет
+               context.fill();
+
+
+                
+         //Рисуем левую крайнюю сторону флага    
+      context.moveTo(0, 10);//верхняя точка левого верхнего угла
+        context.bezierCurveTo( 0, 10, 20,30, 65,25);//идем в право
+    
+      context.lineTo(65, 320);//вниз
+ 
+  
+    
+    
+    context.bezierCurveTo( 65, 320, 20,320, 1,300);//идем влево к началу левого нижнего  угла
+     context.closePath(); // смыкание
+
+context.fillStyle = '#B22222'; // Темно-красный цвет
+context.fill();//Закрашиваем
+//правая сторона флага
+       context.moveTo(400, 35);//Правая крайняя точка верхнего угла
+        context.lineTo(400, 330);//Идем вниз
+        context.bezierCurveTo( 400, 330, 370,320, 335,315);//идем влево
+              context.lineTo(335, 20);//идем вверх
+              context.bezierCurveTo( 335, 20, 370,25, 400,35);//рисуем дугу и соединяем ее с правой крайней точкой верхнего угла
+        context.closePath(); // смыкание
+context.fillStyle = '#B22222'; 
+context.fill();
+//Верхний край флага над кленовым листом
+        context.moveTo(65, 25);    
+          context.bezierCurveTo( 65, 25, 200,0, 335,20);
+          //Нижний край флага под кленовым листом
+          context.moveTo(65, 320);
+           context.bezierCurveTo(65, 320, 200,300, 335,315);
+         context.strokeStyle = "#B22222";//стиль для линии 
+         context.stroke();
+            //Функция помощник=)
+          document.querySelector('.block').onmousemove = function(event) {
+    event = event || window.event; // кроссбраузерность
+    console.log(event); // вывод в консоль
+    document.querySelector('.x').innerHTML = event.offsetX;
+    document.querySelector('.y').innerHTML = event.offsetY;
+
+}
+      }
+      
+
+    </script>
+    <style>
+   
+    </style>
+</head>
+<body>
+  <div class="block">
+  
+    <canvas id="canvas" height="400" width="400">
+        Ваш браузер не поддерживает элемент <i>Canvas</i>
+    </canvas><br/>
+    X: <span class="x"></span><br>
+    Y: <span class="y"></span>
+  </div></body>
+   
+
+
+
+</html>
